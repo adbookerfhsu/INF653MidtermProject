@@ -1,7 +1,7 @@
 <?php
-    $dsn = "mysql:host=hngomrlb3vfq3jcr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;dbname=r6odg96pvkgct8fi";
-    $username = "oaknzbxtidk1ongn";
-    $password ="qdr1gbtw13lh16aa";
+    $dsn = "mysql:host=	hngomrlb3vfq3jcr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;dbname=kgp21rpv7ij4y8mf";
+    $username = "pwptmv8c3plijz4l";
+    $password ="upx9tlzf0xdvnlq9";
     
     
 
