@@ -1,4 +1,4 @@
-<?php include ('../view/header.php'); ?>
+<?php include ('./view/header.php'); ?>
     <main>
         <h1>Add Vehicle</h1>
         <form action="admin.php" method="post" id="add_vehicle_form">
@@ -39,6 +39,6 @@
             <label>&nbsp;</label>
             <input type="submit" value="Add Vehicle" /><br>
         </form>
-        <p><a href="admin.php?action=sort_by_price">View Inventory</a></p>
+        <p><a href="admin.php?action=sort">View Inventory</a></p>
     </main>
-<?php include '../view/footer.php'; ?>
+<?php include './view/footer.php'; ?>

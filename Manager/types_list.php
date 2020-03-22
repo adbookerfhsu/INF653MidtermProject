@@ -1,4 +1,4 @@
-<?php include '../view/header.php'; ?>
+<?php include './view/header.php'; ?>
 <main>
 
     <h1>Vehicle Types</h1>
@@ -34,7 +34,7 @@
         <input type="submit" value="Add"/>
     </form>
 
-    <p><a href="admin.php?action=sort_by_price">List Vehicles</a></p>
+    <p><a href="admin.php?action=sort">List Vehicles</a></p>
 
 </main>
-<?php include '../view/footer.php'; ?>
+<?php include './view/footer.php'; ?>

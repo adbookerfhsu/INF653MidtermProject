@@ -1,9 +1,9 @@
-<?php include '../view/header.php'; ?>
+<?php include './view/header.php'; ?>
 <main>
 
 
             
-<form action="./admin.php" method="get" id="sort_by">
+<form action="admin.php" method="get" id="sort_by">
                 <select name="vehicle_by_make">
                     <option value="0">Filter By Make</option>
                     <?php foreach ($makes as $make) : ?>
@@ -74,9 +74,9 @@
         
         <p><a href="?action=show_add_form">Click here to add new vehicle</a></p>
                 
-        <p><a href="admin.php?action=sort_by_price">View Inventory</a></p>        
+        <p><a href="admin.php?action=sort">View Inventory</a></p>        
         <p><a href="admin.php?action=list_types">View/Edit Vehicle Types</a></p>
         <p><a href="admin.php?action=list_classes">View/Edit Vehicle Classes</a></p>
     </div>
 </main>
-<?php include '../view/footer.php'; ?>
+<?php include './view/footer.php'; ?>
