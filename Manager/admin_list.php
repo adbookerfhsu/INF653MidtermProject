@@ -1,4 +1,4 @@
-<?php include './view/header.php'; ?>
+<?php include '../view/header.php'; ?>
 <main>
 
 
@@ -57,7 +57,7 @@
                     <td><?php echo $vehicle['Price']; ?></td>
                     <td> <?php echo $vehicle['VehicleType'];?></td>
                     <td> <?php echo $vehicle['VehicleClass'];?></td>
-                    <td><form action="./admin.php" method="post">
+                    <td><form action="../admin.php" method="post">
                     <input type="hidden" name="action"
                            value="delete_vehicle">
                     <input type="hidden" name="VehicleNum"
@@ -79,4 +79,4 @@
         <p><a href="admin.php?action=list_classes">View/Edit Vehicle Classes</a></p>
     </div>
 </main>
-<?php include './view/footer.php'; ?>
+<?php include '../view/footer.php'; ?>

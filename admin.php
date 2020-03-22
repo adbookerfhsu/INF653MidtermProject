@@ -1,8 +1,8 @@
 <?php
-require('./model/database.php');
-require('./model/vehicle_db.php');
-require('./model/type_db.php');
-require('./model/class_db.php');
+require('model/database.php');
+require('model/vehicle_db.php');
+require('model/type_db.php');
+require('model/class_db.php');
 
 
 
@@ -62,7 +62,7 @@ if ($action == 'sort') {
     // Validate inputs
     if ($VehicleType == NULL) {
         $error = "Invalid type name. Check name and try again.";
-        include('./errors/error.php');
+        include('../errors/error.php');
     } else {
         add_type($VehicleType);
         header('Location: admin.php?action=list_types');  // display the Vehicle Types page
@@ -81,7 +81,7 @@ if ($action == 'sort') {
     // Validate inputs
     if ($VehicleClass == NULL) {
         $error = "Invalid class name. Check name and try again.";
-        include('./errors/error.php');
+        include('errors/error.php');
     } else {
         add_class($VehicleClass);
         header('Location: admin.php?action=list_classes');  // display the Vehicle Class page
