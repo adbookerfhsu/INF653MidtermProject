@@ -1,0 +1,92 @@
+/* the styles for the html elements */
+body {
+    width: 800px;
+}
+
+header h1 {
+    margin: 0;
+    padding: .5em 0;
+    color: #091034;
+    text-align: center;
+}
+main {
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 30px 0px 40px rgba(0,0,0,0.4),
+    -30px 0px 40px rgba(0,0,0,0.4);
+}
+div {
+    float: left;
+    width: 500px;
+    padding-bottom: 1.5em;
+    
+}
+
+h1 {
+    font-size: 150%;
+    margin: 0;
+    padding: .5em 0 .25em;
+}
+h2 {
+    font-size: 120%;
+    margin: 0;
+    padding: .25em 0 .5em;
+}
+h1, h2 {
+    color:#183BF0;
+}
+ul {
+    margin: 0 0 1em 0;
+    padding: 0 0 0 2.5em;
+}
+li {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #183BF0;
+    font-weight: bold;
+}
+a:hover {
+    color: red;
+}
+table {
+    border: 1px solid#1430B8;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px dashed #1430B8;
+    padding: .2em .5em .2em .5em;
+    vertical-align: top;
+    text-align: left;
+}
+form {
+    margin: 0;
+
+}
+br {
+    clear: left;
+}
+
+
+
+
+
+
+
+/* sytles for additem page */
+#add_item_form {
+    margin: .5em 0 1em;
+}
+#add_item_form label {
+    width: 6em;
+    padding-right: 1em;
+    padding-bottom: .5em;
+    float: left;
+}
+#add_item_form input {
+    float: left;
+}
+#add_item_form input[text] {
+    width: 15em;
+}

@@ -1,0 +1,79 @@
+html {
+  background-color: #ffffff;
+}
+
+body {
+  margin-top: 0;
+  font-family: "Roboto", sans-serif;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #e2e5e5;
+  border: 1px solid #462a20;
+  -webkit-box-shadow: 30px 0px 40px rgba(55, 105, 112, 0.4), -30px 0px 40px rgba(55, 105, 112, 0.4);
+          box-shadow: 30px 0px 40px rgba(55, 105, 112, 0.4), -30px 0px 40px rgba(55, 105, 112, 0.4);
+}
+
+header {
+  margin: 0;
+  border-bottom: 2px solid #05494e;
+}
+
+header .center {
+  display: block;
+  width: 75%;
+  margin: 0 auto;
+}
+
+main {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer {
+  clear: both;
+  margin-top: 1em;
+  border-top: 2px solid #05494e;
+}
+
+footer p {
+  text-align: center;
+  font-size: 75%;
+  margin: 1rem 0;
+}
+
+table {
+  background-color: #ffffff;
+  border: 1px solid #05494e;
+  border-collapse: collapse;
+}
+
+table td, table th {
+  padding: .25rem;
+  border: 1px solid #05494e;
+  vertical-align: top;
+  text-align: left;
+}
+
+#tableDiv {
+  overflow: auto;
+  width: 100%;
+}
+
+#heading {
+  font-size: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  body {
+    max-width: 60%;
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 799px) {
+  body {
+    max-width: 100%;
+    font-size: 1.5rem;
+  }
+}
+/*# sourceMappingURL=main.css.map */
