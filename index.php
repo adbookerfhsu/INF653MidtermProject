@@ -42,7 +42,7 @@ if ($action == 'sort') {
 } else if($action== 'vehicle_by_type'){
     $type_code = filter_input(INPUT_GET, 'type_code');
     $vehicles = get_vehicle_by_type($type_code);
-    include('vehicle_list.php');
+    
 } else if($action== 'vehicle_by_class'){
     $class_code = filter_input(INPUT_GET, 'class_code');
     $vehicles = get_vehicle_by_class($class_code);
