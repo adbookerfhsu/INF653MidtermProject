@@ -1,6 +1,30 @@
 <?php
 
+function get_classes() {
+    global $db;
+    $query = 'SELECT *
+              FROM class
+              ORDER BY class_code';                   
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $classes = $statement->fetchAll();
+    $statement->closeCursor();
+    return $classes;
+}
 
+function get_class_name($class_code) {
+    global $db;
+    $query = 'SELECT *
+              FROM class
+              WHERE class_code = :class_code';                   
+    $statement = $db->prepare($query);
+    $statement->bindValue(':class_code', $class_code);
+    $statement->execute();
+    $class = $statement->fetch();
+    $statement->closeCursor();
+    $class_name = $class['VehicleClass'];
+    return $class_name;
+}
 
 function add_class($VehicleClass) {
     global $db;

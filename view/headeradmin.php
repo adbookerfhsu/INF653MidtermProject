@@ -1,8 +1,3 @@
-<?php
-session_start();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +11,4 @@ session_start();
 
 <!-- the body section -->
 <body>
-<header><img src="./view/zippylogo.png" alt="Zippy Logo" class="center"/>
-<?php if(isset($_SESSION['firstname'])) { ?>
-    <p>Welcome, <?php echo $_SESSION['firstname'] ?>. (<a href="logout.php">Log Out</a>)</p>
-    
-<?php } else { ?>
-    <p><a href="register.php" id="register">Register</a></p>
-<?php } ?>
-</header>
+<header><img src="./view/zippylogo.png" alt="Zippy Logo" class="center"/></header>

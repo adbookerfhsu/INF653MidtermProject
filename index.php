@@ -8,48 +8,43 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action == NULL) {
-        $action = 'sort';
+        $action = 'list_vehicles';
     }
 }
-
-if ($action == 'sort') {
-    $sort = filter_input(INPUT_GET, 'sort');
-    $Price = filter_input(INPUT_GET, 'Price');
-    $Year = filter_input(INPUT_GET, 'Year');
-    $class_code = filter_input(INPUT_GET, 'class_code');
-    $type_code = filter_input(INPUT_GET, 'type_code');
+if ($action == 'list_vehicles') {
+    $type_code = filter_input(INPUT_GET, 'type_code', FILTER_VALIDATE_INT);
+    $class_code = filter_input(INPUT_GET, 'class_code', FILTER_VALIDATE_INT);
     $VehicleMake = filter_input(INPUT_GET, 'Make');
+    $sort = filter_input(INPUT_GET, 'sort');
+    switch ($sort):
+        case "Price":
+            break;
+        case "Year":
+            break;
+        default:
+            $sort = "Price";
+        endswitch;
+    if ($type_code !=NULL && $type_code != FALSE) {
+        $type_name = get_type_name($type_code);
+        $vehicles = get_vehicle_by_type($type_code, $sort);
+    }  else if ($class_code != NULL && $class_code != FALSE) {
+        $class_name = get_class_name($class_code);
+        $vehicles = get_vehicle_by_class($class_code, $sort);
+    } else if($VehicleMake !=NULL && $VehicleMake !=FALSE) {
+        $vehicles = get_vehicle_by_make($VehicleMake, $sort);
+    } else {
+        $vehicles = get_vehicles($sort);
+    }               
     $makes = get_makes();
     $types = get_types();
-    $type_name = get_type_name($type_code);
     $classes = get_classes();
-    $class_name = get_class_name($class_code);
-    if ($sort == "Year"){
-    $vehicles = sort_by_year();
-    } else {
-        $vehicles = sort_by_price();
-    }
-    include('vehicle_list.php');
-}  else if($action == 'list_makes'){
-    $makes == get_makes();
     include('vehicle_list.php');
 } else if($action == 'list_types'){
     $types == get_types();
-    include('vehicle_list.php');    
+    include('type_list.php');    
 } else if($action == 'list_classes'){
     $classes == get_classes();
-    include('vehicle_list.php');
-} else if($action== 'vehicle_by_type'){
-    $type_code = filter_input(INPUT_GET, 'type_code');
-    $vehicles = get_vehicle_by_type($type_code);
-    
-} else if($action== 'vehicle_by_class'){
-    $class_code = filter_input(INPUT_GET, 'class_code');
-    $vehicles = get_vehicle_by_class($class_code);
-    include('vehicle_list.php');
-} else if ($action == 'vehicle_by_make'){
-    $VehicleMake = filter_input(INPUT_GET, 'Make');
-    $vehicles = get_vehicle_by_make($VehicleMake);
-    include('vehicle_list.php');
+    include('class_list.php');
+
 }
 ?>

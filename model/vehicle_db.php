@@ -1,13 +1,16 @@
 <?php
-function sort_by_price() {
+function get_vehicles($sort) {
         global $db;
-       
-        $query = 'SELECT v.VehicleNum, v.Year, v.Make, v.Model, v.Price, t.VehicleType, c.VehicleClass
-                      FROM vehicles v 
-                      JOIN type t ON v.type_code = t.type_code
-                      JOIN class c ON v.class_code = c.class_code
-                      ORDER BY v.Price DESC';
-       
+        if ($sort == 'Year'){
+                $orderby = 'v.Year';
+            } else {
+                $orderby = 'v.Price';
+            }
+                $query = 'SELECT v.VehicleNum, v.Year, v.Make, v.Model, v.Price, t.VehicleType, c.VehicleClass
+                FROM vehicles v 
+                LEFT JOIN type t ON v.type_code = t.type_code
+                LEFT JOIN class c ON v.class_code = c.class_code
+                ORDER BY ' .$orderby . ' DESC';
         $statement = $db->prepare($query);
         $statement->execute();
         $vehicles = $statement->fetchAll();
@@ -15,20 +18,6 @@ function sort_by_price() {
         return $vehicles;
 }
    
-function sort_by_year() {
-        global $db;
-        $query = 'SELECT v.VehicleNum, v.Year, v.Make, v.Model, v.Price, t.VehicleType, c.VehicleClass
-                      FROM vehicles v 
-                      JOIN type t ON v.type_code = t.type_code
-                      JOIN class c ON v.class_code = c.class_code
-                      ORDER BY v.Year';
-        $statement = $db->prepare($query);
-        $statement->execute();
-        $vehicles = $statement->fetchAll();
-        $statement->closeCursor();
-        return $vehicles;
-
-}
 function get_makes() {
         global $db;
         $query = 'SELECT *
@@ -41,100 +30,94 @@ function get_makes() {
         return $makes;
 }
 
-function get_types() {
+function get_vehicle_by_make($VehicleMake, $sort) {
         global $db;
-        $query = 'SELECT *
-                  FROM type';                   
-        $statement = $db->prepare($query);
-        $statement->execute();
-        $types = $statement->fetchAll();
-        $statement->closeCursor();
-        return $types;
-}
-
-function get_type_name($type_code) {
-        global $db;
-        $query = 'SELECT *
-                  FROM type
-                  WHERE type_code = :type_code';                   
-        $statement = $db->prepare($query);
-        $statement->bindValue(':type_code', $type_code);
-        $statement->execute();
-        $type = $statement->fetch();
-        $statement->closeCursor();
-        return $type;
-}
-
-function get_classes() {
-        global $db;
-        $query = 'SELECT *
-                  FROM class';                   
-        $statement = $db->prepare($query);
-        $statement->execute();
-        $classes = $statement->fetchAll();
-        $statement->closeCursor();
-        return $classes;
-}
-
-function get_class_name($VehicleClass) {
-        global $db;
-        $query = 'SELECT *
-                  FROM class
-                  WHERE VehicleClass = :VehicleClass';                   
-        $statement = $db->prepare($query);
-        $statement->bindValue(':VehicleClass', $VehicleClass);
-        $statement->execute();
-        $class = $statement->fetch();
-        $statement->closeCursor();
-        return $class;
-}
-
-function get_vehicle_by_make($VehicleMake) {
-        global $db;
-        $query = 'SELECT v.Year, v.Make, v.Model, v.Price, t.VehicleType, c.VehicleClass
-                      FROM vehicles v 
-                      JOIN type t ON v.type_code = t.type_code
-                      JOIN class c ON v.class_code = c.class_code
-                      WHERE v.Make = :VehicleMake';
-                      
+        if ($sort == 'Year'){
+                $orderby = 'v.Year';
+            } else {
+                $orderby = 'v.Price';
+            }
+        if ($VehicleMake == NULL || $VehicleMake == FALSE) {
+                $query = 'SELECT v.Year, v.Make, v.Model, v.Price, t.VehicleType, c.VehicleClass
+                        FROM vehicles v 
+                        LEFT JOIN type t ON v.type_code = t.type_code
+                        JOIN class c ON v.class_code = c.class_code
+                        ORDER BY ' . $orderby . ' DESC';
+        }else {
+                $query = 'SELECT v.Year, v.Make, v.Model, v.Price, t.VehicleType, c.VehicleClass
+                        FROM vehicles v 
+                        LEFT JOIN type t ON v.type_code = t.type_code
+                         JOIN class c ON v.class_code = c.class_code
+                        WHERE v.Make = :VehicleMake
+                        ORDER BY ' . $orderby . ' DESC';
+        }            
         $statement = $db->prepare($query);
         $statement->bindValue(':VehicleMake', $VehicleMake);
         $statement->execute();
         $vehicles = $statement->fetchAll();
         $statement->closeCursor();
-        
+        return $vehicles;
 }
 
-function get_vehicle_by_type($type_code) {
+function get_vehicle_by_type($type_code, $sort) {
         global $db;
+        if ($sort == 'Year'){
+                $orderby = 'v.Year';
+            } else {
+                $orderby = 'v.Price';
+            }
+        if ($type_code == NULL || $type_code == FALSE) {
+                $query = 'SELECT v.Year, v.Make, v.Model, v.Price, v.type_code, t.VehicleType, c.VehicleClass
+                        FROM vehicles v 
+                        LEFT JOIN type t ON v.type_code = t.type_code
+                        LEFT JOIN class c ON v.class_code = c.class_code
+                        ORDER by ' . $orderby . ' DESC';
+        } else {    
         $query = 'SELECT v.Year, v.Make, v.Model, v.Price, v.type_code, t.VehicleType, c.VehicleClass
-                      FROM vehicles v 
-                      JOIN type t ON v.type_code = t.type_code
-                      JOIN class c ON v.class_code = c.class_code
-                      WHERE t.type_code = :type_code';
-                      
+                        FROM vehicles v 
+                        LEFT JOIN type t ON v.type_code = t.type_code
+                        LEFT JOIN class c ON v.class_code = c.class_code
+                        WHERE t.type_code = :type_code
+                        ORDER BY '. $orderby .' DESC';
+        }              
         $statement = $db->prepare($query);
         $statement->bindValue(':type_code', $type_code);
         $statement->execute();
-        $vehicles = $statement->fetch();
-        $statement->closeCursor();
-        
-}
-function get_vehicle_by_class($class_code) {
-        global $db;
-        $query = 'SELECT v.Year, v.Make, v.Model, v.Price, t.VehicleType, c.VehicleClass
-                      FROM vehicles v 
-                      JOIN type t ON v.type_code = t.type_code
-                      JOIN class c ON v.class_code = c.class_code
-                      WHERE c.class_code = :class_code';
-                      
-        $statement = $db->prepare($query);
-        $statement->bindValue(':class_code', $class_code);
-        $statement->execute();
         $vehicles = $statement->fetchAll();
         $statement->closeCursor();
+        return $vehicles;
         
 }
+function get_vehicle_by_class($class_code, $sort) {
+        global $db;
+        if ($sort == 'Year'){
+                $orderby = 'v.Year';
+            } else {
+                $orderby = 'v.Price';
+            }
+            if ($class_code == NULL || $class_code == FALSE) {
+                $query = 'SELECT v.Year, v.Make, v.Model, v.Price, v.type_code, t.VehicleType, c.VehicleClass
+                        FROM vehicles v 
+                        LEFT JOIN type t ON v.type_code = t.type_code
+                        LEFT JOIN class c ON v.class_code = c.class_code
+                        ORDER by ' . $orderby . ' DESC';
+            } else {
+                $query = 'SELECT v.Year, v.Make, v.Model, v.Price, v.type_code, t.VehicleType, c.VehicleClass
+                FROM vehicles v 
+                LEFT JOIN type t ON v.type_code = t.type_code
+                LEFT JOIN class c ON v.class_code = c.class_code
+                WHERE v.class_code = :class_code 
+                ORDER BY ' . $orderby . ' DESC';
+            }
+            $statement = $db->prepare($query);
+            $statement->bindValue(':class_code', $class_code);
+            $statement->execute();
+            $vehicles = $statement->fetchAll();
+            $statement->closeCursor();
+            return $vehicles;
+        }
+        
+
 
 function delete_vehicle($vehicle_num) {
         global $db;

@@ -54,6 +54,12 @@ table td, table th {
   text-align: left;
 }
 
+.sortbtn {
+  padding: .50rem;
+  background-color: #05494e;
+  color: #ffffff;
+}
+
 #tableDiv {
   overflow: auto;
   width: 100%;
