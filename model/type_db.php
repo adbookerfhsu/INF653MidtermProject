@@ -3,7 +3,8 @@
 function get_types() {
     global $db;
     $query = 'SELECT *
-              FROM type';                   
+              FROM type
+              ORDER BY type_code';                   
     $statement = $db->prepare($query);
     $statement->execute();
     $types = $statement->fetchAll();
@@ -12,6 +13,9 @@ function get_types() {
 }
 
 function get_type_name($type_code) {
+    if ($type_code == NULL | $type_code == FALSE) {
+        return NULL;
+    } 
     global $db;
     $query = 'SELECT *
               FROM type
@@ -21,7 +25,8 @@ function get_type_name($type_code) {
     $statement->execute();
     $type = $statement->fetch();
     $statement->closeCursor();
-    return $type;
+    $type_name = $type['VehicleType'];
+    return $type_name;
 }
 
 function add_type($VehicleType) {

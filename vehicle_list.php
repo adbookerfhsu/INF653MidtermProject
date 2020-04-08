@@ -1,40 +1,42 @@
-<?php include 'view/header.php'; ?>
 <main>
 
  <!-- display a list of categories -->
- <aside>
+<nav>
      <br>
-        <form action="." method="get" id="usermenus">
+        <form action="." method="get" id="make_selection">
             <section id="dropdowns">
-                <?php if($makes !=0) { ?>
+                <?php if(sizeof($makes) !=0) { ?>
                     <label>Make:</label>
                     <select name="Make">
-                        <option value="0">Filter By Make</option>
+                        <option value="0">View All Makes</option>
                          <?php foreach ($makes as $make) : ?>
-                            <option value="<?php echo $make['Make']; ?>"><?php echo $make['Make']; ?>
+                            <option value="<?php echo $make['Make']; ?>"<?php echo ($VehicleMake ==$make['Make'] ? "selected" : false) ?>>
+                                <?php echo $make['Make']; ?>
                            </option>
-                    <?php endforeach; ?>
-                </select>
-                         <?php } ?>
-                <br>
-                <?php if ($types !=0) { ?>
-                    <label>Type:</label>
-                    <select name="type_code" >
-                        <option value="0">Filter By Type</option>
-                        <?php foreach ($types as $type) : ?>
-                            <option value="<?php echo $type['type_code']; ?>">
-                           <?php echo $type['VehicleType']; ?></option>
                         <?php endforeach; ?>
                     </select>
-                        <?php } ?>    
+                <?php } ?>
                 <br>
-                <?php if ($classes !=0) { ?>
+                <?php if ( sizeof($types) !=0) { ?>
+                    <label>Type:</label>
+                    <select name="type_code" >
+                        <option value="0">View All Types</option>
+                        <?php foreach ($types as $type) : ?>
+                            <option value="<?php echo $type['type_code']; ?>" <?php echo($type_name == $type['VehicleType'] ? "selected" : false)?> >
+                                <?php echo $type['VehicleType']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php } ?>    
+                <br>
+                <?php if (sizeof($classes) !=0) { ?>
                     <label>Class:</label>               
                     <select name="class_code" >
-                        <option value="0">Filter By Class</option>
+                        <option value="0">View All Classes</option>
                         <?php foreach ($classes as $class) : ?>
-                            <option value="<?php echo $class['class_code']; ?>">
-                            <?php echo $class['VehicleClass']; ?></option>
+                            <option value="<?php echo $class['class_code']; ?>" <?php echo ($class_name == $class['VehicleClass'] ? "selected" : false)?>>
+                            <?php echo $class['VehicleClass']; ?>
+                        </option>
                         <?php endforeach; ?>
                     </select>
                 <?php } ?>    
@@ -42,20 +44,23 @@
                <br>
                <section id="radioSortby">
                     <span>Sort By:</span>
-                    <input type="radio" is="sortPrice" name="sort" value="Price" checked>
-                    <label for="sortPrice">Price</label>
-                    <input type="radio" is="sortYear" name="sort" value="Year">
-                    <label for="sortYear">Year</label>
-                    <input type="submit" value="Submit Sort" class="sortbtn">
+                    <input type="radio" id="sortByPrice" name="sort" value="Price" <?php echo($sort == "Price" ? "checked" : false)?>>
+                    <label for="sortByPrice">Price</label>
+                    <input type="radio" id="sortByYear" name="sort" value="Year" <?php echo ($sort == "Year" ? "checked" : false)?>>
+                    <label for="sortByYear">Year</label>
+                    <input type="submit" value="Submit Sort" class="button blue button-slim">
+                    <input id="resetVehicleListForm" type="reset" value="Reset Search" class="button red button-slim" >
+
                 </section>           
             </form>    
-    </aside>    
+    </nav>    
 
-    
+   <section>
+
     <h1 id="heading">Zippy Inventory</h1>
     <div id="tableDiv">
-        <?php if ($vehicles !=0) { ?>
-    <table>
+        <?php if (sizeof($vehicles) !=0) { ?>
+        <table>
             <tr>
                 <th>Year</th>
                 <th>Make</th>
@@ -92,4 +97,4 @@
                     <p> There are no matching vehicles in Zippy Used Auto Inventory.</p>
                     <?php } ?>    
 </main>
-<?php include 'view/footer.php'; ?>
+<script defer src="view/js/main.js" type="text/javascript"></script>

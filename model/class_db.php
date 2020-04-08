@@ -13,6 +13,9 @@ function get_classes() {
 }
 
 function get_class_name($class_code) {
+    if ($class_code == NULL && $class_code == FALSE) {
+        return NULL;
+    } 
     global $db;
     $query = 'SELECT *
               FROM class

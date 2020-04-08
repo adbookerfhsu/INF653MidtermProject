@@ -9,4 +9,4 @@
         <p>&nbsp;</p>
     </main>
 
-<?php include 'view/footer.php';?>
+<?php include '../view/footer.php';?>
