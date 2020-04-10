@@ -1,29 +1,42 @@
 <?php
-require_once('util/secure_conn.php');
-include('view/headeradmin.php');
+    require_once('model/database.php');
+    require_once('model/admin_db.php');
+
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = trim(filter_input(INPUT_POST, 'username'));
+        $password = trim(filter_input(INPUT_POST, 'password'));
+
+        if (empty($username)) $error_username = 'Please enter your username.';
+        if (empty($password)) $error_password = 'Please enter your password.';
+
+        if (empty($error_username) && empty($password)) {
+            if (is_valid_admin_login($username, $password)) {
+                session_start();
+                $_SESSION['is_valid_admin'] = true;
+                header("Location: admin.php");
+            } else {
+                $error_username = 'Username and password do not validate.';
+            }
+        }
+    }
+    include('view/headeradmin.php');
 ?>
 
 <main>
-<h1>Login</h1>
+<h1>Admin Login - Please sign in!</h1>
 
-<form action="." method="post" id="admin_Login_form" class="aligned">
-    <input type="hidden" name="action" value="login">
-        
-        <label>Username:</label>
-        <input type="text" class="text" name="username">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="admin_Login_form" >
+            
+        <label for="username">Username:</label>
+        <input type="text" class="text" name="username"><span class="error_message"><?php if(!empty($error_username)) echo $error_username; ?></span>
         <br>
 
-        <label>Password:</label>
-        <input type="password" class="text" name="password">
+        <label for="password">Password:</label>
+        <input type="password" name="password"><span class="error_message"><?php if(!empty($error_password)) echo $error_password; ?></span>
 
-        <label>Confirm Password:</label>
-        <input type="password" class="text" name="confirmpassword">
-
-        <label>&nbsp;</label>
-        <input type="submit" value="Login">
+        
+        <input type="submit" class="button blue" value="Login">
 </form>
-
-    <p><?php echo $login_message; ?></p>
-
-</main>
-
+    <p>All fields required.</p>
+ </main>
+   <?php include 'view/footer.php';?>

@@ -1,4 +1,7 @@
-<?php include 'view/headeradmin.php'; ?>
+<?php 
+    require_once('util/valid_admin.php');
+    include 'view/headeradmin.php'; 
+?>
 <main>
           
     <form action="admin.php" method="get" id="make_selection">

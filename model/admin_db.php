@@ -7,7 +7,7 @@ function add_admin($username, $password) {
             VALUES (:username, :password)';
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
-    $statement->bindValue(':password', $password);
+    $statement->bindValue(':password', $hash);
     $statement->execute();
     $statement->closeCursor();
 }
@@ -21,6 +21,7 @@ function is_valid_admin_login($username, $password) {
     $statement->execute();
     $row = $statement->fetch();
     $statement->closeCursor();
-    $hash = $row['password'];
+    $hash = (!empty($row['password'])) ? $row['password'] : NULL;
     return password_verify($password, $hash);
 }
+?>

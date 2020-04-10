@@ -1,4 +1,6 @@
-<?php include 'view/headeradmin.php'; ?>
+<?php 
+    require_once('util/valid_admin.php');
+    include 'view/headeradmin.php'; ?>
     <main>
         <h1>Add Vehicle</h1>
         <form action="admin.php" method="post" id="add_vehicle_form">
@@ -23,7 +25,7 @@
             </select><br>
 
             <label for="Year">Year:</label>
-            <input type="text" name="Year" min="1920" max="2100" maxlenth="4" pattern=[0-9]{1,5}" required><br>
+            <input type="text" name="Year" min="1920" max="2100" maxlenth="4" pattern="[0-9]{1,5}" required><br>
 
             <label>Make:</label>
             <input type="text" name="Make" maxlength="50" required><br>

@@ -1,4 +1,4 @@
-<?php include '../view/header.php'; ?>
+<?php include 'view/header.php'; ?>
 
     <main>
         <h1>Database Error</h1>
@@ -9,4 +9,4 @@
         <p>&nbsp;</p>
     </main>
 
-<?php include '../view/footer.php';?>
+<?php include 'view/footer.php';?>
