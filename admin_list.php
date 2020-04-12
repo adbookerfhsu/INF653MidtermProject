@@ -11,7 +11,7 @@
                         <select name="Make">
                             <option value="0">View All Makes</option>
                             <?php foreach ($makes as $make) : ?>
-                                <option value="<?php echo $make['Make']; ?>"<?php echo ($VehicleMake ==$make['Make'] ? "selected" : false) ?>>
+                                <option value="<?php echo $make['Make']; ?>"<?php echo ($VehicleMake == $make['Make'] ? "selected" : false) ?>>
                                     <?php echo $make['Make']; ?>
                             </option>
                             <?php endforeach; ?>
@@ -49,8 +49,8 @@
                         <label for="sortByPrice">Price</label>
                         <input type="radio" id="sortByYear" name="sort" value="Year" <?php echo ($sort == "Year" ? "checked" : false)?>>
                         <label for="sortByYear">Year</label>
-                        <input type="submit" value="Submit Sort" class="button blue button-slim">
-                        <input id="resetVehicleListForm" type="reset" class="button red button-slim">
+                        <input type="submit" value="Submit Sort" class="button">
+                        <input id="resetVehicleListForm" type="reset" class="button">
         </section>          
     </form>    
     <body>                            
@@ -74,15 +74,15 @@
                                 <td><?php echo $vehicle['Year']; ?></td>
                                 <td><?php echo $vehicle['Make']; ?></td>
                                 <td><?php echo $vehicle['Model']; ?></td>
-                                <?php if ($vehicle['VehicleType']== NULL || $vehicle['VehicleType']==FALSE) { ?>
+                                <?php if (empty($vehicle['VehicleType'])) { ?>
                                     <td>None</td>
                                 <?php } else { ?>
-                                <td> <?php echo $vehicle['VehicleType'];?></td>
+                                    <td><?php echo $vehicle['VehicleType'];?></td>
                                 <?php } ?>
-                                <?php if ($vehicle['VehicleClass']== NULL || $vehicle['VehicleClass']== FALSE) { ?>
+                                <?php if (empty($vehicle['VehicleClass'])) { ?>
                                     <td>None<td>
                                 <?php } else { ?>
-                                    <td><?php echo $vehicle['VehicleClass'];?></td>
+                                    <td><?php echo $vehicle['VehicleClass']; ?></td>
                                     <?php } ?>
                                     <td><?php echo "$".number_format($vehicle['Price'], 2); ?></td>
                                     <td>
@@ -91,7 +91,7 @@
                                         value="delete_vehicle">
                                         <input type="hidden" name="VehicleNum"
                                         value="<?php echo $vehicle['VehicleNum']; ?>">
-                                        <input type="submit" value="DELETE" class="button red">
+                                        <input type="submit" value="DELETE" class="button">
                                     </form>
                                 </td>
                             </tr>

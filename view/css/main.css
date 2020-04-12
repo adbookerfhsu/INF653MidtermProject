@@ -20,6 +20,8 @@ header {
 
 header .center {
   display: block;
+  -ms-flex-line-pack: left;
+      align-content: left;
   width: 75%;
   margin: 0 auto;
 }
@@ -57,6 +59,12 @@ table td, table th {
 .sortbtn {
   padding: .50rem;
   background-color: #05494e;
+  color: #ffffff;
+}
+
+.button {
+  padding: .50rem;
+  background-color: #861704;
   color: #ffffff;
 }
 

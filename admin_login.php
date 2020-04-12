@@ -9,7 +9,7 @@
         if (empty($username)) $error_username = 'Please enter your username.';
         if (empty($password)) $error_password = 'Please enter your password.';
 
-        if (empty($error_username) && empty($password)) {
+        if (empty($error_username) && empty($error_password)) {
             if (is_valid_admin_login($username, $password)) {
                 session_start();
                 $_SESSION['is_valid_admin'] = true;
@@ -19,23 +19,24 @@
             }
         }
     }
-    include('view/headeradmin.php');
+    
 ?>
-
+<?php include 'view/headeradmin.php' ; ?>
 <main>
-<h1>Admin Login - Please sign in!</h1>
+    <h1>Admin Login - Please sign in!</h1>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="admin_Login_form" >
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="admin_Login_form" >
             
         <label for="username">Username:</label>
-        <input type="text" class="text" name="username"><span class="error_message"><?php if(!empty($error_username)) echo $error_username; ?></span>
+        <input type="text" name="username" id="username">
+        <span class="error_message"><?php if(!empty($error_username)) echo $error_username; ?></span>
         <br>
 
         <label for="password">Password:</label>
-        <input type="password" name="password"><span class="error_message"><?php if(!empty($error_password)) echo $error_password; ?></span>
-
+        <input type="password" name="password" id="password">
+        <span class="error_message"><?php if(!empty($error_password)) echo $error_password; ?></span>
         
-        <input type="submit" class="button blue" value="Login">
+        <input type="submit" class="button" value="LOG IN">
 </form>
     <p>All fields required.</p>
  </main>

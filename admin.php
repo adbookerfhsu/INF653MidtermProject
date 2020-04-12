@@ -1,7 +1,6 @@
 <?php
     session_start();
-    
-    //require_once('util/valid_admin.php');
+    require_once('util/valid_admin.php');
     require('model/database.php');
     require('model/vehicle_db.php');
     require('model/type_db.php');
@@ -27,17 +26,18 @@
             $vehicles = get_vehicles($sort);
             //filter for VehicleMake
             if (!empty($VehicleMake)){
-                $vehicles= array_filter($vehicles, function($array)use($VehicleMake){return $array["Make"]==$VehicleMake;
+                $vehicles= array_filter($vehicles, function($array)use($VehicleMake) {
+                    return $array["Make"] == $VehicleMake;
                 });
             }
             // filter for VehicleType
-            if ($type_code !=NULL && $type_code !=FALSE) {
+            if (!empty($type_code)) {
                 $vehicles = array_filter($vehicles, function($array) use ($type_name) {
-                    return $array["VehicleType"]==$type_name;
+                    return $array["VehicleType"] == $type_name;
                 });
             }
             //filter for VehicleClass
-            if ($class_code != NULL && $class_code !=FALSE){
+            if (!empty($class_code)) {
                 $vehicles = array_filter($vehicles, function($array)use($class_name){
                     return $array["VehicleClass"] == $class_name;
                 });
@@ -93,29 +93,29 @@
             include('add_vehicle_form.php');
             break;
         case 'add_vehicle':
-            $type_code = filter_input(INPUT_POST, 'type_code');
-            $class_code = filter_input(INPUT_POST, 'class_code');
-            $Year = filter_input(INPUT_POST, 'Year');
+            $type_code = filter_input(INPUT_POST, 'type_code', FILTER_VALIDATE_INT);
+            $class_code = filter_input(INPUT_POST, 'class_code', FILTER_VALIDATE_INT);
+            $Year = filter_input(INPUT_POST, 'Year', FILTER_VALIDATE_INT);
             $Make = filter_input(INPUT_POST, 'Make');
             $Model = filter_input(INPUT_POST, 'Model');
-            $Price = filter_input(INPUT_POST, 'Price');
+            $Price = filter_input(INPUT_POST, 'Price', FILTER_VALIDATE_INT);
             if (empty($type_code) || empty($class_code) || empty($Year) || empty($Make) || empty($Model) || empty($Price)) {
                 $error = "Invalid vehicle data. Check all fields and try again.";
                 include('errors/error.php');
             } else {
-                add_vehicle($Year, $Make, $Model, $Price, $type_code, $class_code);
+                add_vehicle($type_code, $class_code, $Year, $Make, $Model, $Price);
                 header("Location: admin.php");
             }
             break;
         case 'add_type':
             $type_name = filter_input(INPUT_POST, 'VehicleType');
             add_type($type_name);
-            header('Location: admin.php?action=list_types');  
+            header("Location: admin.php?action=list_types");  
             break;
         case 'add_class':
             $class_name = filter_input(INPUT_POST, 'VehicleClass');
             add_class($class_name);
-            header('Location: admin.php?action=list_classes');  
+            header("Location: admin.php?action=list_classes");  
             break;
         case 'logout':
             $_SESSION = array();

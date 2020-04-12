@@ -1,5 +1,5 @@
 <?php 
-    require_once('util/valid_admin.php');
+    //require_once('util/valid_admin.php');
     include 'view/headeradmin.php'; ?>
     <main>
         <h1>Add Vehicle</h1>
@@ -37,7 +37,7 @@
             <input type="text" name="Price" required><br>
                         
             <label id="blanklabel">&nbsp;</label>
-            <input type="submit" value="Add Vehicle" class ="button blue"><br>
+            <input type="submit" value="ADD VEHICLE" class ="button"><br>
         </form>
         <?php include 'view/adminlinks.php'; ?>
         <?php include 'view/footer.php'; ?>

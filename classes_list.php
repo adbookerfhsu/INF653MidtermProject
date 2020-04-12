@@ -1,4 +1,7 @@
-<?php include 'view/headeradmin.php'; ?>
+<?php 
+    //require_once('util/valid_admin.php');
+    include 'view/headeradmin.php'; 
+?>
 <main>
 
     <h1>Vehicle Class</h1>
@@ -18,7 +21,7 @@
                     <input type="hidden" name="action" value="delete_class" />
                     <input type="hidden" name="class_code"
                            value="<?php echo $class['class_code']; ?>"/>
-                    <input type="submit" value="DELETE"/>
+                    <input type="submit" class="button" value="DELETE"/>
                 </form>
             </td>
         </tr>
@@ -37,12 +40,8 @@
         <input type="text" name="class_name" max="20" required><br>
 
         <label id="blanklabel">&nbsp;</label>
-        <input id="add_class_button" type="submit" class="button blue" value="Add Class">
+        <input id="add_class_button" type="submit" class="button" value="ADD CLASS">
     </form>
-    <section class="zippylinks">
-        <p><a href="admin.php">Back to Admin Vehicle List</a></p>
-        <p><a href="admin.php?action=show_add_form">Add a Vehicle to Inventory</a></p>
-        <p><a href="admin.php?action=list_types">View/Edit Vehicle Types</a></p>
-    </section>
+    <?php include 'view/adminlinks.php'; ?>
     <?php include 'view/footer.php'; ?>
 </main>
